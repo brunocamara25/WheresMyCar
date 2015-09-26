@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".LoginActivity"
+            android:name="br.com.wheresmycar.Activity.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +24,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PrincipalActivity"
+            android:name="br.com.wheresmycar.Activity.PrincipalActivity"
             android:label="@string/title_activity_principal" >
         </activity>
         <activity
-            android:name=".AndaresActivity"
+            android:name="br.com.wheresmycar.Activity.AndaresActivity"
             android:label="@string/title_activity_andares" >
         </activity>
 
@@ -46,11 +46,11 @@
         -->
 
         <activity
-            android:name=".BlocoActivity"
+            android:name="br.com.wheresmycar.Activity.BlocoActivity"
             android:label="@string/title_activity_bloco" >
         </activity>
         <activity
-            android:name=".VagasActivity"
+            android:name="br.com.wheresmycar.Activity.VagasActivity"
             android:label="@string/title_activity_vagas" >
         </activity>
     </application>
