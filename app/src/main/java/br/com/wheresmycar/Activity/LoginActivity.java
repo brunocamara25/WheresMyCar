@@ -3,8 +3,8 @@ package br.com.wheresmycar.Activity;
 
         import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+        import android.content.Intent;
+        import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,7 +31,7 @@ import java.util.List;
 import br.com.wheresmycar.dao.DatabaseHelper;
 import br.com.wheresmycar.dto.CarrosDTO;
 import br.com.wheresmycar.dto.UsuarioDTO;
-        import wheresmycar.com.br.wheresmycar.R;
+import wheresmycar.com.br.wheresmycar.R;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -76,7 +76,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         List<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
         listaUsuarios = dbHelper.getUsuario(login);
 
-
+        Log.i("Sucesso", "Logado");
+        Intent i = new Intent(LoginActivity.this,PrincipalActivity.class);
+        startActivity(i);
+        finish();
 
 //        boolean validaDadosLogin = true;
 //        if (login == null || login.equals("")) {
@@ -94,10 +97,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 //            for (UsuarioDTO listaUsuario : listaUsuarios) {
 //                if (listaUsuario.getLogin().equalsIgnoreCase(login.toString()) && listaUsuario.getSenha().equalsIgnoreCase(senha.toString()) ){
 //                    MensagemUtil.addMensage(LoginActivity.this,(String) getText(R.string.logado));
-                    Log.i("Sucesso", "Logado");
-                    Intent i = new Intent(LoginActivity.this,PrincipalActivity.class);
-                    startActivity(i);
-                    finish();
+//                    Log.i("Sucesso", "Logado");
+//                    Intent i = new Intent(LoginActivity.this,PrincipalActivity.class);
+//                    startActivity(i);
+//                    finish();
 //                }else{
 //                    Toast toast = Toast.makeText(this, "Usuário não Cadastrado!", Toast.LENGTH_LONG);
 //                    toast.show();
