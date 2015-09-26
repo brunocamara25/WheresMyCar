@@ -292,15 +292,15 @@ public class AndaresActivity extends Activity implements View.OnClickListener{
 //			listarVagasDisponiveis();
 //		}
 //
-//		    //Teremos tr�s constantes, sendo:
-//			//NAMESPACE: O endere�o do site que cont�m o Web Service.
-//			//URL: O endereço do servi�o Web Service.
-//			//SOAP_ACTION: O endere�o do site + m�todo utilizado.
+//		    //Teremos tres constantes, sendo:
+//			//NAMESPACE: O endereco do site que contem o Web Service.
+//			//URL: O endereço do servico Web Service.
+//			//SOAP_ACTION: O endereco do site + metodo utilizado.
 //		public void listarVagasDisponiveis() {
-//			//Objeto composto pelo NameSpace e pelo m�todo que queremos chamar
+//			//Objeto composto pelo NameSpace e pelo metodo que queremos chamar
 //			SoapObject soap = new SoapObject("http://smartparking.somee.com/Servico.svc", "ListarAndares");
 //
-//			//Requisição do web service, solicitação do n�mero do CEP
+//			//Requisição do web service, solicitação do numero do CEP
 //			//soap.addProperty("cep", "50740110");
 //			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11);
 //			envelope.dotNet = true;
