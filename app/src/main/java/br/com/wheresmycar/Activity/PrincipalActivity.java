@@ -110,11 +110,11 @@ public class PrincipalActivity extends Activity {
 	            Log.i("Sucess", "Imagem Capturada.");
 	        } else if (resultCode == RESULT_CANCELED) {
 	        	
-	        	MensagemUtil.addMensage(this, "Captura da C�mera cancelada.");
+	        	MensagemUtil.addMensage(this, "Captura da Camera cancelada.");
 	        	Log.e("Error", (String)getText(R.string.msg_cancela_camera));
 	        } else {
 	        	
-	        	MensagemUtil.addMensage(this, "Erro na C�mera");
+	        	MensagemUtil.addMensage(this, "Erro na Camera");
 	        	Log.e("Error", (String)getText(R.string.msg_erro_camera));
 	        }
 	    }
@@ -151,10 +151,10 @@ public class PrincipalActivity extends Activity {
 		            Toast.makeText(this, "Image saved to:\n" + data.getData(), Toast.LENGTH_SHORT).show();
 		            Log.i("Sucess", "Imagem Capturada.");
 		        } else if (resultCode == RESULT_CANCELED) {
-		        	Toast.makeText(this, "Captura da C�mera cancelada.", Toast.LENGTH_SHORT).show();
+		        	Toast.makeText(this, "Captura da Camera cancelada.", Toast.LENGTH_SHORT).show();
 		        	Log.e("Error", (String)getText(R.string.msg_cancela_camera));
 		        } else {
-		        	Toast.makeText(this, "Erro na C�mera", Toast.LENGTH_SHORT).show();
+		        	Toast.makeText(this, "Erro na Camera", Toast.LENGTH_SHORT).show();
 		        	Log.e("Error", (String)getText(R.string.msg_erro_camera));
 		        }
 		    }
