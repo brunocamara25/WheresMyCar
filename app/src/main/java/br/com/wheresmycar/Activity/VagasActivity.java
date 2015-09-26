@@ -64,6 +64,9 @@ public class VagasActivity extends Activity implements View.OnClickListener{
     //Timer Refresh
     private Timer autoUpdate;
 
+    public int vagaParaReserva;
+    public int carroParaReserva;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -246,56 +249,58 @@ public class VagasActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
 
         if(v == btVaga1){
-            reservarVaga(idVagaBt1, 1178);
+            vagaParaReserva = idVagaBt1;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga2){
-            reservarVaga(idVagaBt2, 1177);
+            vagaParaReserva = idVagaBt2;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga3){
-            reservarVaga(idVagaBt3, 1177);
+            vagaParaReserva = idVagaBt3;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga4){
-            reservarVaga(idVagaBt4, 1177);
+            vagaParaReserva = idVagaBt4;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga5){
-            reservarVaga(idVagaBt5, 1177);
+            vagaParaReserva = idVagaBt5;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga6){
-            reservarVaga(idVagaBt6, 1177);
+            vagaParaReserva = idVagaBt6;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga7){
-            reservarVaga(idVagaBt7, 1177);
+            vagaParaReserva = idVagaBt7;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga8){
-            reservarVaga(idVagaBt8, 1177);
+            vagaParaReserva = idVagaBt8;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga9){
-            reservarVaga(idVagaBt9, 1177);
+            vagaParaReserva = idVagaBt9;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }else if(v == btVaga10){
-            reservarVaga(idVagaBt10, 1177);
+            vagaParaReserva = idVagaBt10;
+            carroParaReserva = 1177;
+            new ReservarVaga().execute();
+            ListarVagasJson();
         }
     }
 
-
-    protected List<VagasDTO> reservarVaga(long idVaga,long IdCarro) {
-
-        String url = "http://smartparking.somee.com/wcf/MobileService.svc/json/ReservarVaga?Id_Vaga="+ idVaga +"&Id_Carro="+ IdCarro;
-
-        new GetSetDataWeb(url, "", "").execute();
-
-        try {
-
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpGet request = new HttpGet();
-            request.setURI(new URI(url));
-            HttpResponse response = httpclient.execute(request);
-            InputStream content = response.getEntity().getContent();
-            Reader reader = new InputStreamReader(content);
-            Gson gson = new Gson();
-            vagasList = Arrays.asList(gson.fromJson(reader, VagasDTO[].class));
-            content.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast toast = Toast.makeText(VagasActivity.this, "Serviço Fora do Ar!", Toast.LENGTH_SHORT);
-            toast.show();
-            Log.e("Error", (String) getText(R.string.msg_erro_servico));
-
-        }
-        return vagasList;
-    }
 
     @Override
     public void onResume() {
@@ -306,13 +311,60 @@ public class VagasActivity extends Activity implements View.OnClickListener{
             public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        Toast refresh = Toast.makeText(VagasActivity.this, "Refresh!", Toast.LENGTH_SHORT);
-                        refresh.show();
+//                        Toast refresh = Toast.makeText(VagasActivity.this, "Refresh!", Toast.LENGTH_SHORT);
+//                        refresh.show();
                         ListarVagasJson();
                     }
                 });
             }
         }, 0, 40000); // 40 secs
     }
+
+
+
+    private class ReservarVaga extends AsyncTask<Void, Void, List<VagasDTO>> {
+        private String text;
+
+        @Override
+        protected List<VagasDTO> doInBackground(Void... voids) {
+
+            String url = "http://smartparking.somee.com/wcf/MobileService.svc/json/ReservarVaga?Id_Vaga="+ vagaParaReserva +"&Id_Carro="+ carroParaReserva;
+
+            try {
+
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpGet request = new HttpGet();
+                request.setURI(new URI(url));
+                HttpResponse response = httpclient.execute(request);
+                InputStream content = response.getEntity().getContent();
+                Reader reader = new InputStreamReader(content);
+//                Gson gson = new Gson();
+//                vagasList = Arrays.asList(gson.fromJson(reader, VagasDTO[].class));
+                content.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast toast = Toast.makeText(VagasActivity.this, "Serviço Fora do Ar!", Toast.LENGTH_SHORT);
+                toast.show();
+                Log.e("Error", (String) getText(R.string.msg_erro_servico));
+
+            }
+            return vagasList;
+        }
+
+        protected void onPostExecute(List<VagasDTO> vagasList) {
+
+            Log.d("Listando Vagas", "onPostExecute");
+            int varControleVagas = 0;
+            for (VagasDTO vagas : vagasList) {
+                varControleVagas++;
+
+
+            }
+            dialog.dismiss();
+        }
+
+    }
+
 
 }

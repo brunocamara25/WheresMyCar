@@ -230,8 +230,8 @@ public class BlocoActivity extends Activity implements View.OnClickListener {
             public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        Toast refresh = Toast.makeText(BlocoActivity.this, "Refresh!", Toast.LENGTH_SHORT);
-                        refresh.show();
+//                        Toast refresh = Toast.makeText(BlocoActivity.this, "Refresh!", Toast.LENGTH_SHORT);
+//                        refresh.show();
                         ListarBlocosJson();
                     }
                 });

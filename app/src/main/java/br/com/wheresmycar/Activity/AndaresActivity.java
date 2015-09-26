@@ -191,8 +191,8 @@ public class AndaresActivity extends Activity implements View.OnClickListener{
             public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        Toast refresh = Toast.makeText(AndaresActivity.this, "Refresh!", Toast.LENGTH_SHORT);
-                        refresh.show();
+//                        Toast refresh = Toast.makeText(AndaresActivity.this, "Refresh!", Toast.LENGTH_SHORT);
+//                        refresh.show();
                         ListarAndaresJson();
                     }
                 });
