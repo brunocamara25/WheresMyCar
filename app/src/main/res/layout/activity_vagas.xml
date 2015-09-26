@@ -1,0 +1,167 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="wheresmycar.com.br.wheresmycar.VagasActivity"
+    android:background="#3c3c3c"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga1"
+            android:background="#117FCB"
+            android:textStyle="bold"
+            android:textColor="#ffffff" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="94dp"
+            android:layout_weight="0.54" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga2"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga3"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="94dp"
+            android:layout_weight="0.54" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga4"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga5"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="94dp"
+            android:layout_weight="0.54" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga6"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga7"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="94dp"
+            android:layout_weight="0.54" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga8"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga9"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="94dp"
+            android:layout_weight="0.54" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="New Button"
+            android:id="@+id/btVaga10"
+            android:textColor="#ffffff"
+            android:background="#117FCB"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

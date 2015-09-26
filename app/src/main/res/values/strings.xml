@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Where is my car</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">Login: </string>
+    <string name="senha">Senha: </string>
+
+    <!-- Activities -->
+    <string name="title_activity_principal">Where is my car</string>
+    <string name="title_activity_andares">Where is my car</string>
+
+    <!-- Mensagens -->
+    <string name="msg_erro_login">Login Obrigatório.</string>
+    <string name="msg_erro_senha">Senha Obrigatória.</string>
+    <string name="msg_login_nao_cadastrado">Login Incorreto.</string>
+    <string name="msg_senha_nao_cadastrada">Senha Incorreta.</string>
+    <string name="msg_usuario_sem_cadastro">Usuário sem Cadastro.</string>
+    <string name="logado">Logado com Sucesso.</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Mensagens Câmera -->
+
+    <string name="msg_erro_camera">Erro na Câmera.</string>
+    <string name="msg_cancela_camera">Captura da Câmera cancelada.</string>
+    <string name="title_activity_qrcode">Leitor QrCode</string>
+    <string name="cpf">CPF:</string>
+
+    <!-- Mensagens Câmera -->
+
+    <string name="msg_erro_servico">Serviço Fora do Ar.</string>
+    <string name="title_activity_blocos">Blocos</string>
+    <string name="title_activity_bloco">BlocoActivity</string>
+    <string name="title_activity_vagas">VagasActivity</string>
+
+
+
+</resources>

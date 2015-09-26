@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="wheresmycar.com.br.wheresmycar" >
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PrincipalActivity"
+            android:label="@string/title_activity_principal" >
+        </activity>
+        <activity
+            android:name=".AndaresActivity"
+            android:label="@string/title_activity_andares" >
+        </activity>
+
+        <!--
+        <activity
+            android:name="com.google.zxing.client.android.captureActivity"
+            android:label="@string/title_activity_qrcode"
+            android:configChanges="orientation/keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter >
+                <action android:name="com.google.zxing.client.android.SCAN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        -->
+
+        <activity
+            android:name=".BlocoActivity"
+            android:label="@string/title_activity_bloco" >
+        </activity>
+        <activity
+            android:name=".VagasActivity"
+            android:label="@string/title_activity_vagas" >
+        </activity>
+    </application>
+
+</manifest>
