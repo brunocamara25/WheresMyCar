@@ -52,7 +52,7 @@ public class PrincipalActivity extends Activity {
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 				try {
 					act.startActivity(intent);
-				} catch (ActivityNotFoundException anfe) {
+				} catch (ActivityNotFoundException e) {
 
 				}
 			}

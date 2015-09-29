@@ -26,7 +26,8 @@
         android:ems="10"
         android:layout_below="@+id/txtLogin"
         android:layout_alignParentLeft="true"
-        android:gravity="center">
+        android:gravity="center"
+        android:phoneNumber="true">
 
         <requestFocus />
     </EditText>
@@ -37,13 +38,21 @@
         android:layout_height="120px"
         android:text="Logar"
         android:onClick="logar"
-        android:layout_alignParentLeft="true"
         android:gravity="center"
         android:background="#117FCB"
-        android:layout_alignParentStart="false"
         android:textColor="#FFFFFF"
-        android:layout_below="@+id/edtLogin" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/lvPlacas"
+        android:layout_alignEnd="@+id/lvPlacas"
+        android:layout_marginBottom="60dp" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvPlacas"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edtLogin"
+        android:layout_above="@+id/btnLogar" />
 
 
 </RelativeLayout>
