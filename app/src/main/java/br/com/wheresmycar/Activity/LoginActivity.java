@@ -9,14 +9,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -40,17 +38,18 @@ import br.com.wheresmycar.dto.UsuarioDTO;
 import wheresmycar.com.br.wheresmycar.R;
 
 
-public class LoginActivity extends Activity implements View.OnClickListener, View.OnKeyListener {
+public class LoginActivity extends Activity implements View.OnClickListener {
 
     private EditText edtLogin;
-    //private EditText edtSenha;
     private Button btnLogar;
     private static final String TAG = "ExampleActivity";
     private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
+    //Campo passado da tela para chamada servico
     String CPF;
     ProgressDialog dialog;
     List<CarrosDTO> carrosList = new ArrayList<CarrosDTO>();
     ListView listPlacas;
+    Intent paramPlaca;
 
 
     private SQLiteDatabase db;
@@ -63,35 +62,16 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //findViewById(R.id.sign_in_button).setOnClickListener((OnClickListener) this);
         edtLogin = (EditText) findViewById(R.id.edtLogin);
-        //edtSenha = (EditText) findViewById(R.id.edtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
+        btnLogar.setOnClickListener(this);
         listPlacas = (ListView) findViewById(R.id.lvPlacas);
 
         //Criando Banco
         dbHelper = new DatabaseHelper(getApplicationContext());
         dbHelper.createTable();
 
-        CPF = edtLogin.getText().toString();
-
-        ListarCarrosJson();
-
-        edtLogin.setOnKeyListener(this);
-//        edtLogin.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if(actionId==EditorInfo.IME_ACTION_GO){
-//                    Toast toast = Toast.makeText(LoginActivity.this, "Enter!", Toast.LENGTH_LONG);
-//                    toast.show();
-//
-//                }
-//                return false;
-//            }
-//        });
-
-
+        //edtLogin.setOnKeyListener(this);
 
     }
 
@@ -99,45 +79,11 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
     public void logar(View view){
 
         String login = edtLogin.getText().toString();
-       // String senha = edtSenha.getText().toString();
 
         List<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
         listaUsuarios = dbHelper.getUsuario(login);
 
         Log.i("Sucesso", "Logado");
-        Intent i = new Intent(LoginActivity.this,PrincipalActivity.class);
-        startActivity(i);
-        finish();
-
-//        boolean validaDadosLogin = true;
-//        if (login == null || login.equals("")) {
-//            edtLogin.setError(getText(R.string.msg_erro_login));
-//            Log.e("Error", (String) getText(R.string.msg_erro_login));
-//            validaDadosLogin = false;
-//        }
-//        if(senha == null || senha.equals("")){
-//            edtSenha.setError(getText(R.string.msg_erro_senha));
-//            Log.e("Error", (String)getText(R.string.msg_erro_senha));
-//            validaDadosLogin = false;
-//        }
-//
-//        if(!listaUsuarios.isEmpty()) {
-//            for (UsuarioDTO listaUsuario : listaUsuarios) {
-//                if (listaUsuario.getLogin().equalsIgnoreCase(login.toString()) && listaUsuario.getSenha().equalsIgnoreCase(senha.toString()) ){
-//                    MensagemUtil.addMensage(LoginActivity.this,(String) getText(R.string.logado));
-//                    Log.i("Sucesso", "Logado");
-//                    Intent i = new Intent(LoginActivity.this,PrincipalActivity.class);
-//                    startActivity(i);
-//                    finish();
-//                }else{
-//                    Toast toast = Toast.makeText(this, "Usuário não Cadastrado!", Toast.LENGTH_LONG);
-//                    toast.show();
-//                    Log.e("Error", (String)getText(R.string.msg_usuario_sem_cadastro));
-//                    validaDadosLogin = false;
-//                }
-//            }
-//
-//      }
 
     }
 
@@ -184,13 +130,12 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
             Log.d("Listando Placas", "onPostExecute");
 
              /*Lista Placas*/
-
             for (CarrosDTO placas : carrosList) {
                 listaPlacas.add(placas.getPlaca());
             }
 
 
-            final StableArrayAdapter adapter = new StableArrayAdapter(LoginActivity.this,android.R.layout.simple_list_item_1, listaPlacas);
+            final StableArrayAdapter adapter = new StableArrayAdapter(LoginActivity.this,android.R.layout.simple_list_item_single_choice, listaPlacas);
             listPlacas.setAdapter(adapter);
 
             listPlacas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -198,7 +143,10 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                     final String placa = (String) parent.getItemAtPosition(position);
-
+                    paramPlaca = new Intent(LoginActivity.this,PrincipalActivity.class);
+                    paramPlaca.putExtra("placa", placa);
+                    startActivity(paramPlaca);
+                    finish();
                 }
             });
             /*Lista Placas*/
@@ -225,18 +173,25 @@ public class LoginActivity extends Activity implements View.OnClickListener, Vie
     @Override
     public void onClick(View v) {
 
-    }
-
-    @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event){
-        if(keyCode == event.KEYCODE_ENTER){
-            Toast toast = Toast.makeText(LoginActivity.this, "Enter!", Toast.LENGTH_LONG);
-            toast.show();
-            //fazer if 11 caracteres
+        if (v == btnLogar){
+            CPF = edtLogin.getText().toString();
+            ListarCarrosJson();
 
         }
-        return true;
+
     }
+
+//    @Override
+//    public boolean onKey(View v, int keyCode, KeyEvent event){
+//        digitosCpf++;
+//        if(digitosCpf == 11 | digitosCpf > 11 ){
+//            Toast toast = Toast.makeText(LoginActivity.this, "Enter!", Toast.LENGTH_LONG);
+//            toast.show();
+//            //fazer if 11 caracteres
+//
+//        }
+//        return true;
+//    }
 
 }
 
