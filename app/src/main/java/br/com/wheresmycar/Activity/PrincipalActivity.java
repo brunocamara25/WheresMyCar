@@ -6,10 +6,27 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
+
+import br.com.wheresmycar.dto.VagasDTO;
 import wheresmycar.com.br.wheresmycar.R;
 
 public class PrincipalActivity extends Activity {
@@ -19,19 +36,20 @@ public class PrincipalActivity extends Activity {
 	private Uri fileUri;
 	static final String ACTION_SCAN = "com.google.zxing.client.android.SCAN";
 
-	
+	List<VagasDTO> imagensLocalizarCarro;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal);
 	}
-	
+
 
 	public void escolherAndar(View view) {
-		 Intent pageAndar = new Intent(PrincipalActivity.this,AndaresActivity.class);
-		 startActivity(pageAndar);
+		Intent pageAndar = new Intent(PrincipalActivity.this, AndaresActivity.class);
+		startActivity(pageAndar);
 	}
-	
+
 	public void scanQR(View v) {
 		try {
 			Intent intent = new Intent(ACTION_SCAN);
@@ -75,8 +93,55 @@ public class PrincipalActivity extends Activity {
 			}
 		}
 	}
-	
-	
+
+
+	private class localizarCarro extends AsyncTask<Void, Void, List<VagasDTO>> {
+		private String text;
+
+		@Override
+		protected List<VagasDTO> doInBackground(Void... voids) {
+
+			String url = "http://smartparking.somee.com/wcf/MobileService.svc/json/LocalizarCarro?Id_Totem=4&Id_Carro=1190";
+
+			try {
+
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpGet request = new HttpGet();
+				request.setURI(new URI(url));
+				HttpResponse response = httpclient.execute(request);
+				InputStream content = response.getEntity().getContent();
+				Reader reader = new InputStreamReader(content);
+                Gson gson = new Gson();
+				imagensLocalizarCarro = Arrays.asList(gson.fromJson(reader, VagasDTO[].class));
+				content.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				Toast toast = Toast.makeText(PrincipalActivity.this, "Serviço Fora do Ar!", Toast.LENGTH_SHORT);
+				toast.show();
+				Log.e("Error", (String) getText(R.string.msg_erro_servico));
+
+			}
+			return imagensLocalizarCarro;
+		}
+
+		protected void onPostExecute(List<VagasDTO> vagasList) {
+
+			Log.d("Listando Vagas", "onPostExecute");
+			int varControleVagas = 0;
+			for (VagasDTO vagas : vagasList) {
+				varControleVagas++;
+
+
+			}
+
+		}
+
+	}
+
+}
+
+
 //*****************************************************  FUNCIONANDO ****************************************
 	     //SALVAR IMAGEM NA PASTA DO APP
 	 	/*public void fotoQrCode(View view){
@@ -159,7 +224,3 @@ public class PrincipalActivity extends Activity {
 		        }
 		    }
 		}*/
-
-
-	 
-}
