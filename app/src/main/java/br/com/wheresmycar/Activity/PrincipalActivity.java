@@ -16,8 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -31,14 +29,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import br.com.wheresmycar.dto.ImagensDTO;
-import br.com.wheresmycar.dto.VagasDTO;
 import wheresmycar.com.br.wheresmycar.R;
 
 public class PrincipalActivity extends Activity {
@@ -110,51 +104,6 @@ public class PrincipalActivity extends Activity {
 				toast.show();
 			}
 		}
-	}
-
-
-	private class localizarCarro extends AsyncTask<Void, Void, List<ImagensDTO>> {
-		private String text;
-
-		@Override
-		protected List<ImagensDTO> doInBackground(Void... voids) {
-
-			String url = "http://smartparking.somee.com/wcf/MobileService.svc/json/LocalizarCarro?Id_Totem="+ idTotem +"Id_Carro=1190";
-
-			try {
-
-				HttpClient httpclient = new DefaultHttpClient();
-				HttpGet request = new HttpGet();
-				request.setURI(new URI(url));
-				HttpResponse response = httpclient.execute(request);
-				InputStream content = response.getEntity().getContent();
-				Reader reader = new InputStreamReader(content);
-                Gson gson = new Gson();
-                imagensLocalizarCarro = Arrays.asList(gson.fromJson(reader, ImagensDTO[].class));
-				content.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				Toast toast = Toast.makeText(PrincipalActivity.this, "Serviço Fora do Ar!", Toast.LENGTH_SHORT);
-				toast.show();
-				Log.e("Error", (String) getText(R.string.msg_erro_servico));
-
-			}
-			return imagensLocalizarCarro;
-		}
-
-		protected void onPostExecute(List<VagasDTO> vagasList) {
-
-			Log.d("Listando Vagas", "onPostExecute");
-			int varControleVagas = 0;
-			for (VagasDTO vagas : vagasList) {
-				varControleVagas++;
-
-
-			}
-
-		}
-
 	}
 
 
@@ -269,6 +218,8 @@ public class PrincipalActivity extends Activity {
 
     }
 
+
+    //Converte Base64 to Bitmap
 	private Bitmap base64ToBitmap(String b64) {
 		byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
 		return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
