@@ -2,30 +2,42 @@ package br.com.wheresmycar.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import br.com.wheresmycar.dto.ImagensDTO;
 import br.com.wheresmycar.dto.VagasDTO;
 import wheresmycar.com.br.wheresmycar.R;
 
@@ -35,13 +47,16 @@ public class PrincipalActivity extends Activity {
 	private static final String MEDIA_TYPE_IMAGE = null;
 	private Uri fileUri;
 	static final String ACTION_SCAN = "com.google.zxing.client.android.SCAN";
+	int idTotem;
 
-	List<VagasDTO> imagensLocalizarCarro;
+
+	List<ImagensDTO> imagensLocalizarCarro;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal);
+        localizarCarroJson("4");
 	}
 
 
@@ -85,23 +100,26 @@ public class PrincipalActivity extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
 			if (resultCode == RESULT_OK) {
-				String contents = intent.getStringExtra("SCAN_RESULT");
+				String valQrcode = intent.getStringExtra("SCAN_RESULT");
 				String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
 
-				Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format, Toast.LENGTH_LONG);
+//                localizarCarroJson(valQrcode);
+				  localizarCarroJson("4");
+
+				Toast toast = Toast.makeText(this, "Content:" + valQrcode + " Format:" + format, Toast.LENGTH_LONG);
 				toast.show();
 			}
 		}
 	}
 
 
-	private class localizarCarro extends AsyncTask<Void, Void, List<VagasDTO>> {
+	private class localizarCarro extends AsyncTask<Void, Void, List<ImagensDTO>> {
 		private String text;
 
 		@Override
-		protected List<VagasDTO> doInBackground(Void... voids) {
+		protected List<ImagensDTO> doInBackground(Void... voids) {
 
-			String url = "http://smartparking.somee.com/wcf/MobileService.svc/json/LocalizarCarro?Id_Totem=4&Id_Carro=1190";
+			String url = "http://smartparking.somee.com/wcf/MobileService.svc/json/LocalizarCarro?Id_Totem="+ idTotem +"Id_Carro=1190";
 
 			try {
 
@@ -112,7 +130,7 @@ public class PrincipalActivity extends Activity {
 				InputStream content = response.getEntity().getContent();
 				Reader reader = new InputStreamReader(content);
                 Gson gson = new Gson();
-				imagensLocalizarCarro = Arrays.asList(gson.fromJson(reader, VagasDTO[].class));
+                imagensLocalizarCarro = Arrays.asList(gson.fromJson(reader, ImagensDTO[].class));
 				content.close();
 
 			} catch (Exception e) {
@@ -139,6 +157,122 @@ public class PrincipalActivity extends Activity {
 
 	}
 
+
+    private void localizarCarroJson(String valQrcode) {
+        idTotem = Integer.parseInt(valQrcode);
+        //new localizarCarro().execute();
+        new DownloadJsonAsyncTask()
+                .execute("http://smartparking.somee.com/wcf/MobileService.svc/json/LocalizarCarro?Id_Totem=4&Id_Carro=1190");
+    }
+
+    class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<ImagensDTO>> {
+        ProgressDialog dialog;
+
+        //Exibe pop-up indicando que esta sendo feito o download do JSON
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = ProgressDialog.show(PrincipalActivity.this, "Aguarde",
+                    "Fazendo download do JSON");
+        }
+
+        //Acessa o servico do JSON e retorna a lista de imagens
+        @Override
+        protected List<ImagensDTO> doInBackground(String... params) {
+            String urlString = params[0];
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httpget = new HttpGet(urlString);
+            try {
+                HttpResponse response = httpclient.execute(httpget);
+                HttpEntity entity = response.getEntity();
+                if (entity != null) {
+                    InputStream instream = entity.getContent();
+                    String json = getStringFromInputStream(instream);
+                    instream.close();
+                    List<ImagensDTO> imagemList = getImagemList(json);
+                    return imagemList;
+                }
+            } catch (Exception e) {
+                Log.e("Erro", "Falha ao acessar Web service", e);
+            }
+            return null;
+        }
+
+
+        //Depois de executada a chamada do servico
+        @Override
+        protected void onPostExecute(List<ImagensDTO> result) {
+            super.onPostExecute(result);
+            dialog.dismiss();
+            if (result.size() > 0) {
+//                ArrayAdapter<ImagensDTO> adapter = new ArrayAdapter<ImagensDTO>(
+//                        PrincipalActivity.this,
+//                        android.R.layout.simple_list_item_1, result);
+//                setListAdapter(adapter);
+				base64ToBitmap(result.get(0).getImagem());
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        PrincipalActivity.this)
+                        .setTitle("Erro")
+                        .setMessage("Nao foi possivel acessar as informacoes!!")
+                        .setPositiveButton("OK", null);
+                builder.create().show();
+            }
+        }
+
+        //Retorna uma lista de imagens com as informacoes retornadas do JSON
+        private List<ImagensDTO> getImagemList(String jsonString) {
+            List<ImagensDTO> imagens = new ArrayList<ImagensDTO>();
+            try {
+                JSONArray imagemJson = new JSONArray(jsonString);
+                JSONObject imagem;
+
+                for (int i = 0; i < imagemJson.length(); i++) {
+                    imagem = new JSONObject(imagemJson.getString(i));
+                    Log.i("IMAGEM ENCONTRADA: ",
+                            "imagem=" + imagem.getString("Imagem"));
+
+                    ImagensDTO objetoImagem = new ImagensDTO();
+                    objetoImagem.setImagem(imagem.getString("Imagem"));
+                    imagens.add(objetoImagem);
+                }
+            } catch (JSONException e) {
+                Log.e("Erro", "Erro no parsing do JSON", e);
+            }
+            return imagens;
+        }
+
+
+        //Converte objeto InputStream para String
+        private String getStringFromInputStream(InputStream is) {
+            BufferedReader br = null;
+            StringBuilder sb = new StringBuilder();
+            String line;
+            try {
+                br = new BufferedReader(new InputStreamReader(is));
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return sb.toString();
+        }
+
+    }
+
+	private Bitmap base64ToBitmap(String b64) {
+		byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+		return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+	}
 }
 
 

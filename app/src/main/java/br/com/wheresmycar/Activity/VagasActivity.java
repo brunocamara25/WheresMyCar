@@ -367,4 +367,48 @@ public class VagasActivity extends Activity implements View.OnClickListener{
     }
 
 
+    private class CancelarVaga extends AsyncTask<Void, Void, List<VagasDTO>> {
+        private String text;
+
+        @Override
+        protected List<VagasDTO> doInBackground(Void... voids) {
+
+            String url = "http://smartparking.somee.com/wcf/MobileService.svc/json/CancelarReserva?Id_Vaga="+ vagaParaReserva +"&Id_Carro="+ carroParaReserva;
+
+            try {
+
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpGet request = new HttpGet();
+                request.setURI(new URI(url));
+                HttpResponse response = httpclient.execute(request);
+                InputStream content = response.getEntity().getContent();
+                Reader reader = new InputStreamReader(content);
+//                Gson gson = new Gson();
+//                vagasList = Arrays.asList(gson.fromJson(reader, VagasDTO[].class));
+                content.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast toast = Toast.makeText(VagasActivity.this, "Serviço Fora do Ar!", Toast.LENGTH_SHORT);
+                toast.show();
+                Log.e("Error", (String) getText(R.string.msg_erro_servico));
+
+            }
+            return vagasList;
+        }
+
+        protected void onPostExecute(List<VagasDTO> vagasList) {
+
+            Log.d("Listando Vagas", "onPostExecute");
+            int varControleVagas = 0;
+            for (VagasDTO vagas : vagasList) {
+                varControleVagas++;
+
+
+            }
+            dialog.dismiss();
+        }
+
+    }
+
 }
