@@ -53,6 +53,16 @@
             android:name="br.com.wheresmycar.Activity.VagasActivity"
             android:label="@string/title_activity_vagas" >
         </activity>
+        <activity
+            android:name="br.com.wheresmycar.Activity.CaminhoVagaActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_caminho_vaga"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="br.com.wheresmycar.Activity.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
     </application>
 
 </manifest>

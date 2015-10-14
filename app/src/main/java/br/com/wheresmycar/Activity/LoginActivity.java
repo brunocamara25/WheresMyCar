@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -41,6 +42,7 @@ import wheresmycar.com.br.wheresmycar.R;
 public class LoginActivity extends Activity implements View.OnClickListener {
 
     private EditText edtLogin;
+    private TextView txtVersion;
     private Button btnLogar;
     private static final String TAG = "ExampleActivity";
     private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
@@ -61,6 +63,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Versao do app
+        txtVersion = (TextView) findViewById(R.id.txtVersion);
+        txtVersion.setText(R.string.versao);
 
         edtLogin = (EditText) findViewById(R.id.edtLogin);
         btnLogar = (Button) findViewById(R.id.btnLogar);

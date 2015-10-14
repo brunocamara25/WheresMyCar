@@ -32,8 +32,6 @@ public class ConsumirJsonActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		//Download Json
 		new DownloadJsonAsyncTask()
 				.execute("http://smartparking.somee.com/wcf/MobileService.svc/json/LocalizarCarro?Id_Totem=4&Id_Carro=1190");
 	}

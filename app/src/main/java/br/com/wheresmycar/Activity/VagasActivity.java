@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import br.com.wheresmycar.dto.SituacaoVagaDTO;
 import br.com.wheresmycar.dto.VagasDTO;
 import wheresmycar.com.br.wheresmycar.R;
 
@@ -46,8 +47,10 @@ public class VagasActivity extends Activity implements View.OnClickListener{
     private Button btVaga10;
     ProgressDialog dialog;
     List<VagasDTO> vagasList;
+    List<SituacaoVagaDTO> sitVagasList;
     //Valor recebido da activity anterior, para char no servico
     public static int idBloco;
+    boolean situacaoVaga;
 
     //Variáveos que guardam valor dos ids das vagas, para ser passado na chamada servico
     public int idVagaBt1;
@@ -103,12 +106,12 @@ public class VagasActivity extends Activity implements View.OnClickListener{
 
 
     private void ListarVagasJson() {
-        new Task().execute();
+        new ListarVagas().execute();
     }
 
 
 
-    private class Task extends AsyncTask<Void, Void, List<VagasDTO>> {
+    private class ListarVagas extends AsyncTask<Void, Void, List<VagasDTO>> {
         private String text;
 
         @Override
@@ -251,8 +254,14 @@ public class VagasActivity extends Activity implements View.OnClickListener{
         if(v == btVaga1){
             vagaParaReserva = idVagaBt1;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
+            new VerificarReservaVaga().execute();
+            if(situacaoVaga){
+                new ReservarVaga().execute();
+            }else{
+                new CancelarVaga().execute();
+            }
             ListarVagasJson();
+
         }else if(v == btVaga2){
             vagaParaReserva = idVagaBt2;
             carroParaReserva = 1177;
@@ -399,11 +408,48 @@ public class VagasActivity extends Activity implements View.OnClickListener{
 
         protected void onPostExecute(List<VagasDTO> vagasList) {
 
-            Log.d("Listando Vagas", "onPostExecute");
-            int varControleVagas = 0;
-            for (VagasDTO vagas : vagasList) {
-                varControleVagas++;
+            dialog.dismiss();
+        }
 
+    }
+
+    private class VerificarReservaVaga extends AsyncTask<Void, Void, List<SituacaoVagaDTO>> {
+        private String text;
+
+        @Override
+        protected List<SituacaoVagaDTO> doInBackground(Void... voids) {
+
+            String url = "http://smartparking.somee.com/wcf/MobileService.svc/json/ConsultaSituacaoVaga?Id_Vaga="+ vagaParaReserva +"&Id_Carro="+ carroParaReserva;
+
+            try {
+
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpGet request = new HttpGet();
+                request.setURI(new URI(url));
+                HttpResponse response = httpclient.execute(request);
+                InputStream content = response.getEntity().getContent();
+                Reader reader = new InputStreamReader(content);
+                Gson gson = new Gson();
+                sitVagasList = Arrays.asList(gson.fromJson(reader, SituacaoVagaDTO[].class));
+                content.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast toast = Toast.makeText(VagasActivity.this, "Serviço Fora do Ar!", Toast.LENGTH_SHORT);
+                toast.show();
+                Log.e("Error", (String) getText(R.string.msg_erro_servico));
+
+            }
+            return sitVagasList;
+        }
+
+        protected void onPostExecute(List<SituacaoVagaDTO> sitVagasList) {
+
+            Log.d("Verificar Sit. Vaga", "onPostExecute");
+            int varControleVagas = 0;
+            for (SituacaoVagaDTO vaga : sitVagasList) {
+                varControleVagas++;
+                situacaoVaga = vaga.isVagaAindaReservada();
 
             }
             dialog.dismiss();

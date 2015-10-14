@@ -1,5 +1,9 @@
 package br.com.wheresmycar.util;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +21,12 @@ public class Util {
 
 
 	    return timeString;
+	}
+
+	//Converte Base64 to Bitmap
+	public static Bitmap base64ToBitmap(String b64) {
+		byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+		return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
 	}
 
 }

@@ -45,6 +45,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/txtVersion"
+            android:textColor="#ffffff"
+            android:textSize="8dp"
+            android:layout_gravity="right" />
+
         <Space
             android:layout_width="20px"
             android:layout_height="100px"

@@ -24,7 +24,8 @@
         android:layout_below="@+id/imgbtProcVaga"
         android:layout_marginTop="14dp"
         android:background="@drawable/shapebutton"
-        android:src="@mipmap/ic_procurar_carro" />
+        android:src="@mipmap/ic_procurar_carro"
+        android:onClick="scanQR"/>
 
     <ImageButton
         android:id="@+id/imgbtMarcarVaga"

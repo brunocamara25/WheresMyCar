@@ -50,7 +50,7 @@ public class PrincipalActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal);
-        localizarCarroJson("4");
+        //localizarCarroJson("4");
 	}
 
 
@@ -114,6 +114,8 @@ public class PrincipalActivity extends Activity {
                 .execute("http://smartparking.somee.com/wcf/MobileService.svc/json/LocalizarCarro?Id_Totem=4&Id_Carro=1190");
     }
 
+
+
     class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<ImagensDTO>> {
         ProgressDialog dialog;
 
@@ -153,12 +155,20 @@ public class PrincipalActivity extends Activity {
         protected void onPostExecute(List<ImagensDTO> result) {
             super.onPostExecute(result);
             dialog.dismiss();
+            Log.i("Fechando Loading: ","Exibindo Imagem");
+
             if (result.size() > 0) {
 //                ArrayAdapter<ImagensDTO> adapter = new ArrayAdapter<ImagensDTO>(
 //                        PrincipalActivity.this,
 //                        android.R.layout.simple_list_item_1, result);
 //                setListAdapter(adapter);
-				base64ToBitmap(result.get(0).getImagem());
+				//Bitmap caminhoEstacionamentoImg = base64ToBitmap(result.get(0).getImagem());
+                Intent activityCaminhovaga = new Intent(PrincipalActivity.this, CaminhoVagaActivity.class);
+                activityCaminhovaga.putExtra("BitmapImag1", result.get(0).getImagem());
+//				activityCaminhovaga.putExtra("BitmapImag2", result.get(1).getImagem());
+//				activityCaminhovaga.putExtra("BitmapImag3", result.get(2).getImagem());
+                startActivity(activityCaminhovaga);
+
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(
                         PrincipalActivity.this)
@@ -220,7 +230,7 @@ public class PrincipalActivity extends Activity {
 
 
     //Converte Base64 to Bitmap
-	private Bitmap base64ToBitmap(String b64) {
+    private Bitmap base64ToBitmap(String b64) {
 		byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
 		return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
 	}

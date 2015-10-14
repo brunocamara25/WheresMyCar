@@ -31,6 +31,11 @@
     <string name="title_activity_bloco">BlocoActivity</string>
     <string name="title_activity_vagas">VagasActivity</string>
 
+    <string name="title_activity_caminho_vaga">CaminhoVagaActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="versao">WMC.Vers.2.6</string>
 
 
 </resources>
