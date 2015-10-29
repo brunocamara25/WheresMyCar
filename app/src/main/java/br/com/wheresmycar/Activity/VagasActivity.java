@@ -30,6 +30,7 @@ import br.com.wheresmycar.dto.SituacaoVagaDTO;
 import br.com.wheresmycar.dto.VagasDTO;
 import wheresmycar.com.br.wheresmycar.R;
 
+import static android.graphics.Color.BLUE;
 import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
 
@@ -63,6 +64,8 @@ public class VagasActivity extends Activity implements View.OnClickListener{
     public int idVagaBt8;
     public int idVagaBt9;
     public int idVagaBt10;
+
+    String placaCarro;
 
     //Timer Refresh
     private Timer autoUpdate;
@@ -99,6 +102,7 @@ public class VagasActivity extends Activity implements View.OnClickListener{
 
         Intent intent = getIntent();
         idBloco = intent.getIntExtra("idBloco", 0);
+        placaCarro = intent.getStringExtra("placaCarro");
         ListarVagasJson();
 
     }
@@ -152,91 +156,131 @@ public class VagasActivity extends Activity implements View.OnClickListener{
 
                     case 1:
                         btVaga1.setText("  Vaga  " + vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga1.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga1.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga1.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga1.setBackgroundColor(GREEN);
                         }
                         idVagaBt1 = Integer.valueOf(vagas.getId());
                         break;
                     case 2:
                         btVaga2.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga2.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga2.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga2.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga2.setBackgroundColor(GREEN);
                         }
                         idVagaBt2 = Integer.valueOf(vagas.getId());
                         break;
                     case 3:
                         btVaga3.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga3.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga3.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga3.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga3.setBackgroundColor(GREEN);
                         }
                         idVagaBt3 = Integer.valueOf(vagas.getId());
                         break;
                     case 4:
                         btVaga4.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga4.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga4.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga4.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga4.setBackgroundColor(GREEN);
                         }
                         idVagaBt4 = Integer.valueOf(vagas.getId());
                         break;
                     case 5:
                         btVaga5.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga5.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga5.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga5.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga5.setBackgroundColor(GREEN);
                         }
                         idVagaBt5 = Integer.valueOf(vagas.getId());
                         break;
                     case 6:
                         btVaga6.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga6.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga6.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga6.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga6.setBackgroundColor(GREEN);
                         }
                         idVagaBt6 = Integer.valueOf(vagas.getId());
                         break;
                     case 7:
                         btVaga7.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga7.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga7.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga7.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga7.setBackgroundColor(GREEN);
                         }
                         idVagaBt7 = Integer.valueOf(vagas.getId());
                         break;
                     case 8:
                         btVaga8.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga8.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga8.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga8.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga8.setBackgroundColor(GREEN);
                         }
                         idVagaBt8 = Integer.valueOf(vagas.getId());
                         break;
                     case 9:
                         btVaga9.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga9.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga9.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga9.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga9.setBackgroundColor(GREEN);
                         }
                         idVagaBt9 = Integer.valueOf(vagas.getId());
                         break;
                     case 10:
                         btVaga10.setText("  Vaga  "+ vagas.getNome() + "   ");
-                        if(!vagas.getDisponivel().equalsIgnoreCase("true")) {
+                        if(vagas.getDisponivel().equalsIgnoreCase("true")) {
+                            if (!vagas.getDeficiente().equalsIgnoreCase("true")){
+                                btVaga10.setBackgroundColor(GREEN);
+                            }else{
+                                btVaga10.setBackgroundColor(BLUE);
+                            }
+                        }else {
                             btVaga10.setBackgroundColor(RED);
-                        }else if (!vagas.getDeficiente().equalsIgnoreCase("true")){
-                            btVaga10.setBackgroundColor(GREEN);
                         }
                         idVagaBt10 = Integer.valueOf(vagas.getId());
                         break;
@@ -255,58 +299,42 @@ public class VagasActivity extends Activity implements View.OnClickListener{
             vagaParaReserva = idVagaBt1;
             carroParaReserva = 1177;
             new VerificarReservaVaga().execute();
-            if(situacaoVaga){
-                new ReservarVaga().execute();
-            }else{
-                new CancelarVaga().execute();
-            }
-            ListarVagasJson();
-
         }else if(v == btVaga2){
             vagaParaReserva = idVagaBt2;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }else if(v == btVaga3){
             vagaParaReserva = idVagaBt3;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }else if(v == btVaga4){
             vagaParaReserva = idVagaBt4;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }else if(v == btVaga5){
             vagaParaReserva = idVagaBt5;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }else if(v == btVaga6){
             vagaParaReserva = idVagaBt6;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }else if(v == btVaga7){
             vagaParaReserva = idVagaBt7;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }else if(v == btVaga8){
             vagaParaReserva = idVagaBt8;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }else if(v == btVaga9){
             vagaParaReserva = idVagaBt9;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }else if(v == btVaga10){
             vagaParaReserva = idVagaBt10;
             carroParaReserva = 1177;
-            new ReservarVaga().execute();
-            ListarVagasJson();
+            new VerificarReservaVaga().execute();
         }
     }
 
@@ -367,9 +395,8 @@ public class VagasActivity extends Activity implements View.OnClickListener{
             int varControleVagas = 0;
             for (VagasDTO vagas : vagasList) {
                 varControleVagas++;
-
-
             }
+            ListarVagasJson();
             dialog.dismiss();
         }
 
@@ -408,6 +435,7 @@ public class VagasActivity extends Activity implements View.OnClickListener{
 
         protected void onPostExecute(List<VagasDTO> vagasList) {
 
+            ListarVagasJson();
             dialog.dismiss();
         }
 
@@ -449,8 +477,13 @@ public class VagasActivity extends Activity implements View.OnClickListener{
             int varControleVagas = 0;
             for (SituacaoVagaDTO vaga : sitVagasList) {
                 varControleVagas++;
-                situacaoVaga = vaga.isVagaAindaReservada();
+                situacaoVaga = Boolean.valueOf(vaga.getVagaAindaReservada());
 
+            }
+            if(!situacaoVaga){
+                new ReservarVaga().execute();
+            }else{
+                new CancelarVaga().execute();
             }
             dialog.dismiss();
         }

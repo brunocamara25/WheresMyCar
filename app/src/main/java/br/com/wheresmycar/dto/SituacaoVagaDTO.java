@@ -7,22 +7,22 @@ package br.com.wheresmycar.dto;
 
 public class SituacaoVagaDTO {
 
-    private boolean ReservaConcluidaComSucesso;
-    private boolean VagaAindaReservada;
+    private String ReservaConcluidaComSucesso;
+    private String VagaAindaReservada;
 
-    public boolean isReservaConcluidaComSucesso() {
+    public String getReservaConcluidaComSucesso() {
         return ReservaConcluidaComSucesso;
     }
 
-    public void setReservaConcluidaComSucesso(boolean reservaConcluidaComSucesso) {
+    public void setReservaConcluidaComSucesso(String reservaConcluidaComSucesso) {
         ReservaConcluidaComSucesso = reservaConcluidaComSucesso;
     }
 
-    public boolean isVagaAindaReservada() {
+    public String getVagaAindaReservada() {
         return VagaAindaReservada;
     }
 
-    public void setVagaAindaReservada(boolean vagaAindaReservada) {
+    public void setVagaAindaReservada(String vagaAindaReservada) {
         VagaAindaReservada = vagaAindaReservada;
     }
 }
