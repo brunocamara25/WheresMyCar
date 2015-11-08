@@ -96,6 +96,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void ListarCarrosJson() {  new Task().execute(); }
     private class Task extends AsyncTask<Void, Void, List<CarrosDTO>> {
         List<String> listaPlacas = new ArrayList<String>();
+        List<String> idPlaca = new ArrayList<String>();
         @Override
         protected List<CarrosDTO> doInBackground(Void... voids) {
 
@@ -138,6 +139,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
              /*Lista Placas*/
             for (CarrosDTO placas : carrosList) {
                 listaPlacas.add(placas.getPlaca());
+                idPlaca.add(placas.getId());
             }
 
 
@@ -148,8 +150,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                    final String placa = (String) parent.getItemAtPosition(position);
+                    String placa = (String) parent.getItemAtPosition(position);
                     paramPlaca = new Intent(LoginActivity.this,PrincipalActivity.class);
+                    //Substitui Placa pelo Id placa
+                    placa = idPlaca.get(position).toString();
                     paramPlaca.putExtra("placa", placa);
                     startActivity(paramPlaca);
                     finish();

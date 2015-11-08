@@ -42,7 +42,7 @@ public class PrincipalActivity extends Activity {
 	private Uri fileUri;
 	static final String ACTION_SCAN = "com.google.zxing.client.android.SCAN";
 	int idTotem;
-	String placaCarro;
+	String idPlacaCarro;
 
 
 	List<ImagensDTO> imagensLocalizarCarro;
@@ -52,14 +52,14 @@ public class PrincipalActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal);
 		Intent intent = getIntent();
-		placaCarro = intent.getStringExtra("placa");
+		idPlacaCarro = intent.getStringExtra("placa");
         //localizarCarroJson("4");
 	}
 
 
 	public void escolherAndar(View view) {
 		Intent pageAndar = new Intent(PrincipalActivity.this, AndaresActivity.class);
-        pageAndar.putExtra("placaCarro", placaCarro);
+        pageAndar.putExtra("idPlacaCarro", idPlacaCarro);
 		startActivity(pageAndar);
 	}
 

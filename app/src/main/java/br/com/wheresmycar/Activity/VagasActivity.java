@@ -65,7 +65,7 @@ public class VagasActivity extends Activity implements View.OnClickListener{
     public int idVagaBt9;
     public int idVagaBt10;
 
-    String placaCarro;
+    int idPlacaCarro;
 
     //Timer Refresh
     private Timer autoUpdate;
@@ -102,7 +102,7 @@ public class VagasActivity extends Activity implements View.OnClickListener{
 
         Intent intent = getIntent();
         idBloco = intent.getIntExtra("idBloco", 0);
-        placaCarro = intent.getStringExtra("placaCarro");
+        idPlacaCarro = Integer.valueOf(intent.getStringExtra("idPlacaCarro"));
         ListarVagasJson();
 
     }
@@ -297,43 +297,43 @@ public class VagasActivity extends Activity implements View.OnClickListener{
 
         if(v == btVaga1){
             vagaParaReserva = idVagaBt1;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga2){
             vagaParaReserva = idVagaBt2;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga3){
             vagaParaReserva = idVagaBt3;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga4){
             vagaParaReserva = idVagaBt4;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga5){
             vagaParaReserva = idVagaBt5;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga6){
             vagaParaReserva = idVagaBt6;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga7){
             vagaParaReserva = idVagaBt7;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga8){
             vagaParaReserva = idVagaBt8;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga9){
             vagaParaReserva = idVagaBt9;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }else if(v == btVaga10){
             vagaParaReserva = idVagaBt10;
-            carroParaReserva = 1177;
+            carroParaReserva = idPlacaCarro;
             new VerificarReservaVaga().execute();
         }
     }

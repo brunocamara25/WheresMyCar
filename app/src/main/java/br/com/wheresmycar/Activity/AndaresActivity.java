@@ -53,7 +53,7 @@ public class AndaresActivity extends Activity implements View.OnClickListener{
     Intent pageAndar3;
     Intent pageAndar4;
 
-    String placaCarro;
+    String idPlacaCarro;
 
     //Timer Refresh
     private Timer autoUpdate;
@@ -84,7 +84,7 @@ public class AndaresActivity extends Activity implements View.OnClickListener{
         imageButton4.setOnClickListener(this);
 
         Intent intent = getIntent();
-        placaCarro = intent.getStringExtra("placaCarro");
+        idPlacaCarro = intent.getStringExtra("idPlacaCarro");
 
         ListarAndaresJson();
 
@@ -141,28 +141,28 @@ public class AndaresActivity extends Activity implements View.OnClickListener{
                     txtVagasDisp1.setText(vagas.getQtdLivre());
                     pageAndar1 = new Intent(AndaresActivity.this,BlocoActivity.class);
                     pageAndar1.putExtra("idAndar", Integer.valueOf(vagas.getId()));
-                    pageAndar1.putExtra("placaCarro", placaCarro);
+                    pageAndar1.putExtra("idPlacaCarro", idPlacaCarro);
 
                 }else if (vagas.getNome().equalsIgnoreCase("G2")) {
                     txtVagas2.setText(vagas.getQtdVagas());
                     txtVagasDisp2.setText(vagas.getQtdLivre());
                     pageAndar2 = new Intent(AndaresActivity.this,BlocoActivity.class);
                     pageAndar2.putExtra("idAndar", Integer.valueOf(vagas.getId()));
-                    pageAndar2.putExtra("placaCarro", placaCarro);
+                    pageAndar2.putExtra("idPlacaCarro", idPlacaCarro);
 
                 }else if (vagas.getNome().equalsIgnoreCase("G3")) {
                     txtVagas3.setText(vagas.getQtdVagas());
                     txtVagasDisp3.setText(vagas.getQtdLivre());
                     pageAndar3 = new Intent(AndaresActivity.this,BlocoActivity.class);
                     pageAndar3.putExtra("idAndar", Integer.valueOf(vagas.getId()));
-                    pageAndar3.putExtra("placaCarro", placaCarro);
+                    pageAndar3.putExtra("idPlacaCarro", idPlacaCarro);
 
                 }else if (vagas.getNome().equalsIgnoreCase("G4")){
                     txtVagas4.setText(vagas.getQtdVagas());
                     txtVagasDisp4.setText(vagas.getQtdLivre());
                     pageAndar4 = new Intent(AndaresActivity.this,BlocoActivity.class);
                     pageAndar4.putExtra("idAndar", Integer.valueOf(vagas.getId()));
-                    pageAndar4.putExtra("placaCarro", placaCarro);
+                    pageAndar4.putExtra("idPlacaCarro", idPlacaCarro);
                 }
             }
             dialog.dismiss();

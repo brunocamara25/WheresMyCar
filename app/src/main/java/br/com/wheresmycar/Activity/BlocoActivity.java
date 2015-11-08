@@ -56,7 +56,7 @@ public class BlocoActivity extends Activity implements View.OnClickListener {
     Intent pageBloco9;
     Intent pageBloco10;
 
-    String placaCarro;
+    String idPlacaCarro;
 
     //Timer Refresh
     private Timer autoUpdate;
@@ -91,7 +91,7 @@ public class BlocoActivity extends Activity implements View.OnClickListener {
 
         Intent intent = getIntent();
         idAndar = intent.getIntExtra("idAndar", 0);
-        placaCarro = intent.getStringExtra("placaCarro");
+        idPlacaCarro = intent.getStringExtra("idPlacaCarro");
         ListarBlocosJson();
     }
 
@@ -144,61 +144,61 @@ public class BlocoActivity extends Activity implements View.OnClickListener {
                         btBloco1.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco1 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco1.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco1.putExtra("placaCarro", placaCarro);
+                        pageBloco1.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 2:
                         btBloco2.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco2 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco2.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco2.putExtra("placaCarro", placaCarro);
+                        pageBloco2.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 3:
                         btBloco3.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco3 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco3.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco3.putExtra("placaCarro", placaCarro);
+                        pageBloco3.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 4:
                         btBloco4.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco4 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco4.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco4.putExtra("placaCarro", placaCarro);
+                        pageBloco4.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 5:
                         btBloco5.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco5 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco5.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco5.putExtra("placaCarro", placaCarro);
+                        pageBloco5.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 6:
                         btBloco6.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco6 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco6.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco6.putExtra("placaCarro", placaCarro);
+                        pageBloco6.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 7:
                         btBloco7.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco7 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco7.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco7.putExtra("placaCarro", placaCarro);
+                        pageBloco7.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 8:
                         btBloco8.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco8 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco8.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco8.putExtra("placaCarro", placaCarro);
+                        pageBloco8.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 9:
                         btBloco9.setText(" "+ blocos.getNome() + "  Vagas "+ blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco9 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco9.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco9.putExtra("placaCarro", placaCarro);
+                        pageBloco9.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                     case 10:
                         btBloco10.setText(" " + blocos.getNome() + "  Vagas " + blocos.getQtdVagas() + "  Livre " + blocos.getQtdLivre()+ " ");
                         pageBloco10 = new Intent(BlocoActivity.this,VagasActivity.class);
                         pageBloco10.putExtra("idBloco", Integer.valueOf(blocos.getId()));
-                        pageBloco10.putExtra("placaCarro", placaCarro);
+                        pageBloco10.putExtra("idPlacaCarro", idPlacaCarro);
                         break;
                 }
             }
